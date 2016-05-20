@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <title>DENGINE</title>
+    <meta charset="UTF-8" />
+    <meta name="application-name" content="DENGINE" />
+    <meta name="description" content="Juego de pruebas del motor grafico DENGINE y el creador de usuarios DMOD2L." />
+    <meta name="author" content="Oscar170" />
+    <link rel="stylesheet" href="css/style.css" />
+    <script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
+    <script src="js/jquery.min.js"></script>
+    <script src='js/dengine.js'></script>
+    <script src="js/item.js"></script>
+    <script>
+        var refUser = 'github:15236988';
+        var refModel = '';
+        var test;
+        var ref = new Firebase('https://dmode3l.firebaseio.com/');
+        var newRef = ref.child(refUser + '/' + refModel);
+        $(document).ready(function() {
+            dengine.boot();
+            newRef.on('value', function(val) {
+                test = new Item(0, 0, false);
+                test.loadItem(val.val().Link);
+                dengine.addItemToLoad(test);
+                test = new Item(40, 0, false);
+                test.loadItem(val.val().Link);
+                dengine.addItemToLoad(test);
+                test = new Item(20, 20, true);
+                test.loadItem(val.val().Solaire);
+                dengine.addItemToLoad(test);
+                dengine.starGame();
+            }, function(err) {
+                console.log(err.code);
+            });
+
+            $(document).on('keypress, keydown', function(e) {
+                switch (e.keyCode) {
+                    case 38:
+                    case 87: //Up
+                        dengine.movePlayer(0);
+                        break;
+                    case 39:
+                    case 68: //right
+                        dengine.movePlayer(1);
+                        break;
+                    case 40:
+                    case 83: //down
+                        dengine.movePlayer(2);
+                        break;
+                    case 37:
+                    case 65: //left
+                        dengine.movePlayer(3);
+                        break;
+                }
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <canvas id="cancer"></canvas>
+    <canvas id="ecuador"></canvas>
+    <canvas id="capricornio"></canvas>
+</body>
+
+</html>

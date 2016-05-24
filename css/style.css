@@ -5,3 +5,7 @@ canvas {
   margin: 5px;
   position: absolute;
 }
+
+.move {
+  margin-top: 300px;
+}

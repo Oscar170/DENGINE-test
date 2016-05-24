@@ -10,10 +10,10 @@ Motor gráfico para el desarrolló de juegos en HTML5 con canvas.
 > Superposición de capas.
 >
 > Cámara fija en el "Actor".
-
-##Futuras funcionalidades:
+>
 > Manipulación de animaciones(mediante sprites).
-> 
-> Sistema de luz.
 >
 > Sistema de pseudocódigo para el comportamiento de los objetos.
+
+##Futuras funcionalidades:
+> Sistema de luz.

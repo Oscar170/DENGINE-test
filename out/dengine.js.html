@@ -1,4 +1,32 @@
-/**
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: dengine.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: dengine.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
  * Objeto que gestiona los eventos internos del juego.
  * @class
  */
@@ -81,7 +109,7 @@ var Dengine = {
     Dengine.collisionItem = [];
 
     this.stackItems.forEach(function(e, i, a) {
-      if (e.calcFooterPix() < Dengine.camera) layer = 'cancer';
+      if (e.calcFooterPix() &lt; Dengine.camera) layer = 'cancer';
       else if (e.calcFooterPix() == Dengine.camera) layer = 'ecuador';
       else if (e.calcFooterPix() > Dengine.camera) layer = 'capricornio';
 
@@ -96,7 +124,7 @@ var Dengine = {
         Dengine.ctx[layer].stroke();
       });
       // console.log("Sprite " + e.spritePointer + " Of " + Object.keys(e.bodyItem[e.animationPointer]).length);
-      if (e.spritePointer < Object.keys(e.bodyItem[e.animationPointer]).length - 1) e.spritePointer += 1;
+      if (e.spritePointer &lt; Object.keys(e.bodyItem[e.animationPointer]).length - 1) e.spritePointer += 1;
       else e.spritePointer = 0;
       Dengine.ctx[layer].restore();
     });
@@ -119,34 +147,34 @@ var Dengine = {
     var r = false;
 
     var auxSprite = [0, 0];
-    if (item[0].spritePointer < Object.keys(item[0].collisionItem[item[0].animationPointer]).length - 1) auxSprite[0] = item[0].spritePointer + 1;
+    if (item[0].spritePointer &lt; Object.keys(item[0].collisionItem[item[0].animationPointer]).length - 1) auxSprite[0] = item[0].spritePointer + 1;
     else auxSprite[0] = 0;
 
     this.stackCollision.forEach(function(e, i, a) {
-      if (e.spritePointer < Object.keys(e.collisionItem[e.animationPointer]).length - 1) auxSprite[1] = e.spritePointer + 1;
+      if (e.spritePointer &lt; Object.keys(e.collisionItem[e.animationPointer]).length - 1) auxSprite[1] = e.spritePointer + 1;
       else auxSprite[1] = 0;
 
       for (var l in e.collisionItem[e.animationPointer][auxSprite[1]]) {
         for (var n in item[0].collisionItem[item[0].animationPointer][auxSprite[0]]) {
           // console.log(item[0].collisionItem[item[0].animationPointer][auxSprite[0]][n]);
           // console.log(e.collisionItem[e.animationPointer][auxSprite[1]][l]);
-          if ((item[0].collisionItem[item[0].animationPointer][auxSprite[0]][n].X + item[0].translatePos[0]) <=
-            (e.collisionItem[e.animationPointer][auxSprite[1]][l].X  + e.translatePos[0]) &&
+          if ((item[0].collisionItem[item[0].animationPointer][auxSprite[0]][n].X + item[0].translatePos[0]) &lt;=
+            (e.collisionItem[e.animationPointer][auxSprite[1]][l].X  + e.translatePos[0]) &amp;&amp;
             (item[0].collisionItem[item[0].animationPointer][auxSprite[0]][n].toX  + item[0].translatePos[0]) >=
             (e.collisionItem[e.animationPointer][auxSprite[1]][l].X  + e.translatePos[0])) overX = true;
-          if ((item[0].collisionItem[item[0].animationPointer][auxSprite[0]][n].X + item[0].translatePos[0]) <=
-            (e.collisionItem[e.animationPointer][auxSprite[1]][l].toX + e.translatePos[0]) &&
+          if ((item[0].collisionItem[item[0].animationPointer][auxSprite[0]][n].X + item[0].translatePos[0]) &lt;=
+            (e.collisionItem[e.animationPointer][auxSprite[1]][l].toX + e.translatePos[0]) &amp;&amp;
             (item[0].collisionItem[item[0].animationPointer][auxSprite[0]][n].toX + item[0].translatePos[0]) >=
             (e.collisionItem[e.animationPointer][auxSprite[1]][l].toX + e.translatePos[0])) overX = true;
-          if ((item[0].collisionItem[item[0].animationPointer][auxSprite[0]][n].Y + item[0].translatePos[1]) <=
-            (e.collisionItem[e.animationPointer][auxSprite[1]][l].Y + e.translatePos[1]) &&
+          if ((item[0].collisionItem[item[0].animationPointer][auxSprite[0]][n].Y + item[0].translatePos[1]) &lt;=
+            (e.collisionItem[e.animationPointer][auxSprite[1]][l].Y + e.translatePos[1]) &amp;&amp;
             (item[0].collisionItem[item[0].animationPointer][auxSprite[0]][n].toY + item[0].translatePos[1]) >=
             (e.collisionItem[e.animationPointer][auxSprite[1]][l].Y + e.translatePos[1])) overY = true;
-          if ((item[0].collisionItem[item[0].animationPointer][auxSprite[0]][n].Y + item[0].translatePos[1]) <=
-            (e.collisionItem[e.animationPointer][auxSprite[1]][l].toY + e.translatePos[1]) &&
+          if ((item[0].collisionItem[item[0].animationPointer][auxSprite[0]][n].Y + item[0].translatePos[1]) &lt;=
+            (e.collisionItem[e.animationPointer][auxSprite[1]][l].toY + e.translatePos[1]) &amp;&amp;
             (item[0].collisionItem[item[0].animationPointer][auxSprite[0]][n].toY + item[0].translatePos[1]) >=
             (e.collisionItem[e.animationPointer][auxSprite[1]][l].toY + e.translatePos[1])) overY = true;
-          if (overX && overY) {
+          if (overX &amp;&amp; overY) {
             if(item[0].hasOwnProperty('callbackCollision')) item[0].callbackCollision();
             if(e.hasOwnProperty('callbackCollision')) e.callbackCollision();
             r = true;
@@ -207,3 +235,26 @@ var Dengine = {
     }
   }
 }
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Dengine.html">Dengine</a></li><li><a href="Item.html">Item</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Tue May 24 2016 15:42:29 GMT+0200 (CEST)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

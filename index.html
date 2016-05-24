@@ -2,10 +2,10 @@
 <html lang="es">
 
 <head>
-    <title>DENGINE</title>
+    <title>Dengine</title>
     <meta charset="UTF-8" />
-    <meta name="application-name" content="DENGINE" />
-    <meta name="description" content="Juego de pruebas del motor grafico DENGINE y el creador de usuarios DMOD2L." />
+    <meta name="application-name" content="Dengine" />
+    <meta name="description" content="Juego de pruebas del motor grafico Dengine y el creador de usuarios DMOD2L." />
     <meta name="author" content="Oscar170" />
     <link rel="stylesheet" href="css/style.css" />
     <script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
@@ -14,23 +14,27 @@
     <script src="js/item.js"></script>
     <script>
         var refUser = 'github:15236988';
+        // var refUser = 'Anonymous';
         var refModel = '';
+        var auxData;
         var test;
         var ref = new Firebase('https://dmode3l.firebaseio.com/');
         var newRef = ref.child(refUser + '/' + refModel);
         $(document).ready(function() {
-            dengine.boot();
+            Dengine.boot();
+            auxData;
             newRef.on('value', function(val) {
+                auxData = val.val();
                 test = new Item(0, 0, false);
-                test.loadItem(val.val().Link);
-                dengine.addItemToLoad(test);
-                test = new Item(40, 0, false);
-                test.loadItem(val.val().Link);
-                dengine.addItemToLoad(test);
-                test = new Item(20, 20, true);
                 test.loadItem(val.val().Solaire);
-                dengine.addItemToLoad(test);
-                dengine.starGame();
+                test.callbackCollision = function(){this.animationPointer = 0;}
+                test.callbackMove = function(){this.animationPointer = 1;}
+                Dengine.addItemToLoad(test);
+                test = new Item(20, 20, true);
+                test.loadItem(val.val()['Solaire']);
+                test.callbackCollision = function(){this.animationPointer = 0;}
+                test.callbackMove = function(){this.animationPointer = 1;}
+                Dengine.addItemToLoad(test);
             }, function(err) {
                 console.log(err.code);
             });
@@ -39,22 +43,50 @@
                 switch (e.keyCode) {
                     case 38:
                     case 87: //Up
-                        dengine.movePlayer(0);
+                        Dengine.movePlayer(0);
                         break;
                     case 39:
                     case 68: //right
-                        dengine.movePlayer(1);
+                        Dengine.movePlayer(1);
                         break;
                     case 40:
                     case 83: //down
-                        dengine.movePlayer(2);
+                        Dengine.movePlayer(2);
                         break;
                     case 37:
                     case 65: //left
-                        dengine.movePlayer(3);
+                        Dengine.movePlayer(3);
                         break;
                 }
             });
+
+            $(".move").on('click, mousedown, mousemove', function() {
+                switch ($(this).attr('id')*1) {
+                    case 38:
+                    case 87: //Up
+                        Dengine.movePlayer(0);
+                        break;
+                    case 39:
+                    case 68: //right
+                        Dengine.movePlayer(1);
+                        break;
+                    case 40:
+                    case 83: //down
+                        Dengine.movePlayer(2);
+                        break;
+                    case 37:
+                    case 65: //left
+                        Dengine.movePlayer(3);
+                        break;
+                }
+            });
+
+
+            setInterval(function() {
+                Dengine.clearAll();
+                Dengine.startGame();
+            }, Dengine.time);
+
         });
     </script>
 </head>
@@ -63,6 +95,11 @@
     <canvas id="cancer"></canvas>
     <canvas id="ecuador"></canvas>
     <canvas id="capricornio"></canvas>
+
+    <button id="38" class="move">Up</button>
+    <button id="39" class="move">Left</button>
+    <button id="40" class="move">Down</button>
+    <button id="37" class="move">Right</button>
 </body>
 
 </html>
